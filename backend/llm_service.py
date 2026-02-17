@@ -1,8 +1,11 @@
 import json
 import os
+from dotenv import load_dotenv
 from fastapi import HTTPException
 from openai import OpenAI
 import requests # needed when we will use our own endpoint
+
+load_dotenv()
 
 # Groq API key
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
