@@ -39,7 +39,15 @@ def send_prompt_to_llm(prompt: str) -> dict:
         response = client.chat.completions.create(
             model="llama-3.3-70b-versatile",
             messages=[
-                {"role": "system", "content": "You are a helpful AI tutor."},
+                {"role": "system",
+                "content": """
+                You are a strict JSON API.
+                You must ALWAYS return valid JSON.
+                Never return plain text.
+                Never explain outside JSON.
+                If you fail, the system will crash.
+                """
+                },
                 {"role": "user", "content": prompt}
             ],
             temperature=0.7,
@@ -55,10 +63,7 @@ def send_prompt_to_llm(prompt: str) -> dict:
         # Convert string → dictionary
         parsed_output = json.loads(text)
 
-        return {
-            "ai_answer": text,
-            "follow_up_questions": parsed_output.get("follow_up_questions", [])
-        }
+        return parsed_output
     
     except json.JSONDecodeError:
         raise HTTPException(
