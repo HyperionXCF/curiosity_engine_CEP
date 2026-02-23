@@ -46,7 +46,6 @@ def generate_socratic_prompt(user, topic, current_level_text, history_data, sess
     {interests_data}
 
     Your Tasks:
-
     1️⃣ First, provide a clear and complete answer to the student's current question.
        - The explanation must match the student's current level: {current_level_text}.
        - Keep it age-appropriate.
